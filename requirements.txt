@@ -1,0 +1,7 @@
+fastapi #web framework for build API 
+uvicorn #ASGI server for running FastAPI applications
+streamlit #web framework for building interactive web applications
+pytest #testing framework for Python
+httpx #HTTP client for making HTTP requests
+pydantic #data validation and settings management
+requests #HTTP library for Python

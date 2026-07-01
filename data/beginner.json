@@ -1,0 +1,53 @@
+{
+  "level": "beginner",
+  "weeks": [
+    {
+      "week": 1,
+      "title": "Getting Started",
+      "daily_minutes": "15-20",
+      "topics": [
+        "Correct hand position and posture",
+        "White keys: C D E F G A B",
+        "Finger numbers 1-5",
+        "Simple 5-note exercises",
+        "One very easy melody"
+      ]
+    },
+    {
+      "week": 2,
+      "title": "Basic Coordination",
+      "daily_minutes": "20",
+      "topics": [
+        "Practice both hands separately",
+        "Basic note reading",
+        "C major scale, one octave",
+        "Steady rhythm",
+        "One or two beginner songs"
+      ]
+    },
+    {
+      "week": 3,
+      "title": "Playing with Both Hands",
+      "daily_minutes": "20-25",
+      "topics": [
+        "Simple pieces using both hands",
+        "Smooth finger movement",
+        "Basic dynamics: soft and loud",
+        "Note-reading exercises",
+        "Daily song review"
+      ]
+    },
+    {
+      "week": 4,
+      "title": "Building Confidence",
+      "daily_minutes": "25-30",
+      "topics": [
+        "Improve speed and accuracy",
+        "C major scale with both hands",
+        "Simple chords: C, F, G",
+        "Play 2-3 beginner songs",
+        "Review everything learned"
+      ]
+    }
+  ]
+}
