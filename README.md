@@ -1,217 +1,131 @@
-# Multi-Agent-Architektur für einen Musik-Lernassistenten
+# 🎹 AI Piano Coach
 
-## Übersicht
+A simple agent-based piano learning assistant built with **FastAPI**, **Streamlit**, and a modular **agent architecture**.
 
-Das System besteht aus mehreren spezialisierten Agenten, die gemeinsam einen personalisierten Musikunterricht ermöglichen.
+The project demonstrates how specialized agents collaborate to generate a learning plan, create practice exercises, evaluate answers, and track learning progress. The architecture is designed to be easily extendable with an LLM (OpenAI, Gemini, Groq, Ollama).
+
+---
+
+## Architecture
 
 ```text
-User
- │
- ▼
-Orchestrator Agent
- │
- ├── Goal Agent
- ├── Curriculum Agent
- ├── Practice Agent
- ├── Theory Agent
- ├── Feedback Agent
- ├── Progress Agent
- └── Motivation Agent
+                User
+                  │
+                  ▼
+            Streamlit UI
+                  │
+                  ▼
+              FastAPI API
+                  │
+                  ▼
+         Orchestrator Agent
+                  │
+     ┌────────────┼────────────┐
+     ▼            ▼            ▼
+ Goal Agent  Curriculum Agent Practice Agent
+                                  │
+                                  ▼
+                          Feedback Agent
+                                  │
+                                  ▼
+                          Progress Agent
+                                  │
+                                  ▼
+                                Tools
+                                  │
+                                  ▼
+                        Curriculum (JSON)
+                        Optional LLM
 ```
 
-## Komponenten
-
-### Orchestrator Agent
-
-Der zentrale Koordinator des Systems.
-
-**Aufgaben**
-
-- Nimmt Anfragen des Nutzers entgegen.
-- Entscheidet, welche Agenten benötigt werden.
-- Koordiniert den Informationsfluss.
-- Fasst Ergebnisse zu einer Antwort zusammen.
-
 ---
 
-### Goal Agent
-
-Versteht die Lernziele des Nutzers.
-
-**Verantwortlichkeiten**
-
-- Lernziel analysieren
-- Erfahrungsniveau bestimmen
-- Verfügbare Lernzeit erfassen
-- Instrument erkennen
-- Prioritäten definieren
-
-**Beispiel**
-
-> "Ich möchte in drei Monaten Jazz-Piano lernen und täglich 30 Minuten üben."
-
----
-
-### Curriculum Agent
-
-Erstellt einen individuellen Lernplan.
-
-**Verantwortlichkeiten**
-
-- Lernmodule auswählen
-- Reihenfolge festlegen
-- Meilensteine definieren
-- Lernfortschritt berücksichtigen
-
-**Beispiel**
-
-1. Noten lesen
-2. Dur-Tonleitern
-3. Dreiklänge
-4. Akkordfolgen
-5. Improvisation
-
----
-
-### Practice Agent
-
-Generiert tägliche Übungen.
-
-**Verantwortlichkeiten**
-
-- Technikübungen
-- Rhythmusübungen
-- Hörtraining
-- Wiederholungen
-- Hausaufgaben
-
-**Beispiel**
-
-- C-Dur Tonleiter
-- Rhythmus klatschen
-- Akkorde erkennen
-- Melodie nachspielen
-
----
-
-### Theory Agent
-
-Erklärt musikalische Inhalte.
-
-**Verantwortlichkeiten**
-
-- Notenlehre
-- Intervalle
-- Akkorde
-- Harmonielehre
-- Rhythmus
-- Tonleitern
-
-**Beispiel**
-
-> "Ein Dur-Akkord besteht aus Grundton, großer Terz und Quinte."
-
----
-
-### Feedback Agent
-
-Bewertet Antworten und Übungen.
-
-**Verantwortlichkeiten**
-
-- Fehler erkennen
-- Lösungen erklären
-- Verbesserungsvorschläge geben
-- Hinweise statt nur Bewertungen liefern
-
-**Beispiele**
-
-- Rhythmus korrekt
-- Akkord falsch gegriffen
-- Tempo zu schnell
-- Tonhöhe korrekt
-
----
-
-### Progress Agent
-
-Verwaltet den Lernfortschritt.
-
-**Verantwortlichkeiten**
-
-- absolvierte Lektionen speichern
-- Statistiken führen
-- Schwächen erkennen
-- Wiederholungen planen
-
-**Gespeicherte Daten**
-
-- Übungen
-- Punkte
-- Erfolgsquote
-- Übungszeit
-- letzte Lektion
-
----
-
-### Motivation Agent
-
-Passt den Lernprozess an den Nutzer an.
-
-**Verantwortlichkeiten**
-
-- Motivation fördern
-- Schwierigkeit anpassen
-- Erfolge feiern
-- Pausen empfehlen
-- Ziele aktualisieren
-
-**Beispiele**
-
-> "Du hast bereits fünf Tage hintereinander geübt."
-
-> "Die Übungen werden etwas schwieriger."
-
----
-
-## Datenfluss
+## Project Structure
 
 ```text
-User
-   │
-   ▼
-Orchestrator Agent
-   │
-   ├────────► Goal Agent
-   │
-   ├────────► Curriculum Agent
-   │
-   ├────────► Practice Agent
-   │
-   ├────────► Theory Agent
-   │
-   ├────────► Feedback Agent
-   │
-   ├────────► Progress Agent
-   │
-   └────────► Motivation Agent
-                     │
-                     ▼
-              Personalisierte Antwort
-                     │
-                     ▼
-                    User
+.
+├── app/
+│   ├── agents.py
+│   ├── llm.py
+│   ├── main.py
+│   ├── schemas.py
+│   └── tools.py
+├── data/
+│   └── beginner.json
+├── tests/
+├── ui/
+│   └── streamlit_app.py
+├── playground.py
+├── requirements.txt
+└── README.md
 ```
 
+---
 
-## Mögliche Erweiterungen
+## Tech Stack
 
-- Ear Training Agent
-- Chord Recognition Agent
-- Composition Agent
-- Improvisation Coach
-- Performance Evaluation Agent
-- AI Piano Tutor
-- Voice Training Agent
-- MIDI Analysis Agent
-- Audio Feedback Agent
+- FastAPI
+- Streamlit
+- Pydantic
+- Python
+- JSON
+- Pytest
+- Optional: Groq / Gemini / OpenAI
+
+---
+
+## Setup
+
+Create a virtual environment:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Run Backend
+
+```bash
+python3 -m uvicorn app.main:app --reload
+```
+
+API documentation:
+
+```
+http://127.0.0.1:8000/docs
+```
+
+---
+
+## Run Frontend
+
+```bash
+streamlit run ui/streamlit_app.py
+```
+
+Open:
+
+```
+http://localhost:8501
+```
+
+---
+
+## Features
+
+- Agent-based architecture
+- Learning plan generation
+- Practice exercise generation
+- Answer evaluation
+- Progress tracking
+- Modular tool layer
+- Ready for LLM integration
+```
