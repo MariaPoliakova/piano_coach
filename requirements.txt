@@ -4,4 +4,6 @@ streamlit #web framework for building interactive web applications
 pytest #testing framework for Python
 httpx #HTTP client for making HTTP requests
 pydantic #data validation and settings management
-requests #HTTP library for Python
+requests #HTTP library for Pythonu
+openai
+python-dotenv
