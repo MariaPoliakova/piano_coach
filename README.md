@@ -8,7 +8,9 @@ The project demonstrates how specialized agents collaborate to generate a learni
 
 ## Architecture
 
-```text          User
+```text         
+
+                User
                   │
                   ▼
             Streamlit UI
@@ -116,16 +118,4 @@ Open:
 
 ```
 http://localhost:8501
-```
-
----
-
-## Features
-
-- Agent-based architecture
-- Learning plan generation
-- Practice exercise generation using LLM
-- Answer evaluation
-- Progress tracking
-- Modular tool layer
 ```
