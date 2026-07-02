@@ -1,15 +1,14 @@
-# 🎹 AI Piano Coach
+# AI Piano Coach
 
 A simple agent-based piano learning assistant built with **FastAPI**, **Streamlit**, and a modular **agent architecture**.
 
-The project demonstrates how specialized agents collaborate to generate a learning plan, create practice exercises, evaluate answers, and track learning progress. The architecture is designed to be easily extendable with an LLM (OpenAI, Gemini, Groq, Ollama).
+The project demonstrates how specialized agents collaborate to generate a learning plan, create practice exercises, evaluate answers, and track learning progress. The architecture is designed to be used with Ollana and easily extendable with other K LLM (OpenAI, Gemini, Groq).
 
 ---
 
 ## Architecture
 
-```text
-                User
+```text          User
                   │
                   ▼
             Streamlit UI
@@ -23,19 +22,21 @@ The project demonstrates how specialized agents collaborate to generate a learni
      ┌────────────┼────────────┐
      ▼            ▼            ▼
  Goal Agent  Curriculum Agent Practice Agent
-                                  │
-                                  ▼
-                          Feedback Agent
-                                  │
-                                  ▼
-                          Progress Agent
-                                  │
-                                  ▼
-                                Tools
-                                  │
-                                  ▼
-                        Curriculum (JSON)
-                        Optional LLM
+                  │            │
+                  ▼            ▼
+        Curriculum Tool     Ollama LLM
+                  │            │
+                  ▼            ▼
+        Curriculum (JSON)  Llama 3.2 (3B)
+                               │
+                               ▼
+                       AI-generated lesson
+                               │
+                               ▼
+                       Feedback Agent
+                               │
+                               ▼
+                       Progress Agent
 ```
 
 ---
@@ -123,9 +124,8 @@ http://localhost:8501
 
 - Agent-based architecture
 - Learning plan generation
-- Practice exercise generation
+- Practice exercise generation using LLM
 - Answer evaluation
 - Progress tracking
 - Modular tool layer
-- Ready for LLM integration
 ```

@@ -1,19 +1,21 @@
-import os
+from openai import OpenAI
 
-from dotenv import load_dotenv
-from google import genai
-
-load_dotenv()
-
-client = genai.Client(
-    api_key=os.getenv("GEMINI_API_KEY")
+client = OpenAI(
+    base_url="http://localhost:11434/v1",
+    api_key="ollama",  # required by the OpenAI client, ignored by Ollama
 )
 
 
 def ask_llm(prompt: str) -> str:
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt,
+    response = client.chat.completions.create(
+        model="llama3.2:3b",   # or qwen2.5:7b, mistral, etc.
+        messages=[
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        ],
+        temperature=0.7,
     )
 
-    return response.text
+    return response.choices[0].message.content

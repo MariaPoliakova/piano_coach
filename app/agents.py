@@ -1,5 +1,5 @@
 from app.tools import load_curriculum, find_week, calculate_accuracy
-
+from app.llm import ask_llm
 
 def goal_agent(level: str, goal: str, weeks: int, daily_minutes: int) -> dict:
     return {
@@ -37,6 +37,35 @@ def practice_agent(curriculum_plan: dict, week_number: int) -> dict:
 
     topic = selected_week["topics"][0]
 
+    prompt = f"""
+    You are an experienced piano teacher.
+
+    Student profile:
+    - Level: {curriculum_plan["level"]}
+    - Goal: {curriculum_plan["goal"]}
+    - Daily practice time: {curriculum_plan["daily_minutes"]} minutes
+
+    Current lesson:
+    - Week: {selected_week["week"]}
+    - Title: {selected_week["title"]}
+    - Topic: {topic}
+
+    Create one beginner-friendly piano lesson.
+
+    Return the answer in Markdown with these sections:
+
+    ## Objective
+    ## Exercise
+    ## Practice Tips
+    ## Common Mistakes
+    ## Homework
+
+    Keep it short and practical.
+    """
+
+    generated_lesson = ask_llm(prompt)
+
+
     return {
         "exercise_id": f"week_{week_number}_topic_1",
         "week": week_number,
@@ -46,6 +75,7 @@ def practice_agent(curriculum_plan: dict, week_number: int) -> dict:
         "question": f"What is the main focus of this exercise: '{topic}'?",
         "expected_answer": topic,
         "hint": "Look at the topic name and explain it in your own words.",
+        "generated_lesson": generated_lesson,
     }
 
 

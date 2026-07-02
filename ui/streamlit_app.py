@@ -43,16 +43,17 @@ st.divider()
 st.header("2. Today’s Exercise")
 
 if st.button("Generate Exercise"):
-    response = requests.post(
-        f"{API_URL}/exercise",
-        json={
-            "level": level,
-            "goal": goal,
-            "weeks": weeks,
-            "daily_minutes": daily_minutes,
-            "current_week": current_week,
-        },
-    )
+    with st.spinner("Generating lesson with Ollama LLM..."):
+        response = requests.post(
+            f"{API_URL}/exercise",
+            json={
+                "level": level,
+                "goal": goal,
+                "weeks": weeks,
+                "daily_minutes": daily_minutes,
+                "current_week": current_week,
+            },
+        )
 
     data = response.json()
     exercise = data["exercise"]
@@ -64,6 +65,11 @@ if "exercise" in st.session_state:
 
     st.subheader(exercise["title"])
     st.write("**Topic:**", exercise["topic"])
+
+    if "generated_lesson" in exercise:
+        st.markdown("## 🤖 AI-generated lesson")
+        st.markdown(exercise["generated_lesson"])
+
     st.write("**Question:**", exercise["question"])
     st.info(exercise["hint"])
 
