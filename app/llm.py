@@ -1,14 +1,13 @@
 from openai import OpenAI
+import os
 
 client = OpenAI(
-    base_url="http://localhost:11434/v1",
-    api_key="ollama",  # required by the OpenAI client, ignored by Ollama
+    api_key=os.environ["OPENAI_API_KEY"],
 )
-
 
 def ask_llm(prompt: str) -> str:
     response = client.chat.completions.create(
-        model="llama3.2:3b",   # or qwen2.5:7b, mistral, etc.
+        model="gpt-5.4-mini",   # or qwen2.5:7b, mistral, etc.
         messages=[
             {
                 "role": "user",

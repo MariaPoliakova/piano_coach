@@ -23,7 +23,7 @@ The project demonstrates how specialized agents collaborate to generate a learni
                   │
      ┌────────────┼────────────┐
      ▼            ▼            ▼
- Goal Agent  Curriculum Agent Practice Agent
+ Goal   Curriculum Agent  Practice Agent
                   │            │
                   ▼            ▼
         Curriculum Tool     Ollama LLM

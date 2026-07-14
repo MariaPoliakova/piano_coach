@@ -43,7 +43,7 @@ st.divider()
 st.header("2. Today’s Exercise")
 
 if st.button("Generate Exercise"):
-    with st.spinner("Generating lesson with Ollama LLM..."):
+    with st.spinner("Generating lesson with LLM..."):
         response = requests.post(
             f"{API_URL}/exercise",
             json={

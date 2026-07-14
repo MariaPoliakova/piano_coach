@@ -1,7 +1,7 @@
 from app.tools import load_curriculum, find_week, calculate_accuracy
 from app.llm import ask_llm
 
-def goal_agent(level: str, goal: str, weeks: int, daily_minutes: int) -> dict:
+def goal(level: str, goal: str, weeks: int, daily_minutes: int) -> dict:
     return {
         "level": level,
         "goal": goal,
@@ -10,7 +10,7 @@ def goal_agent(level: str, goal: str, weeks: int, daily_minutes: int) -> dict:
     }
 
 
-def curriculum_agent(profile: dict) -> dict:
+def curriculum(profile: dict) -> dict:
     curriculum = load_curriculum(profile["level"])
 
     selected_weeks = [
@@ -136,8 +136,8 @@ def orchestrator_agent(
             "current_level": level,
         }
 
-    profile = goal_agent(level, goal, weeks, daily_minutes)
-    curriculum_plan = curriculum_agent(profile)
+    profile = goal(level, goal, weeks, daily_minutes)
+    curriculum_plan = curriculum(profile)
     exercise = practice_agent(curriculum_plan, current_week)
     feedback = feedback_agent(user_answer, exercise["expected_answer"])
     progress = progress_agent(previous_progress, feedback)

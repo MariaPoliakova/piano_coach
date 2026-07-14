@@ -1,12 +1,17 @@
 from fastapi import FastAPI
-
+from dotenv import load_dotenv
+from pathlib import Path
 from app.schemas import PlanRequest, ExerciseRequest, EvaluateRequest
+
 from app.agents import (
-    goal_agent,
-    curriculum_agent,
+    goal,
+    curriculum,
     practice_agent,
     orchestrator_agent,
 )
+
+ROOT_DIR = Path(__file__).resolve().parent
+load_dotenv(ROOT_DIR / ".env")
 
 
 app = FastAPI(title="AI Piano Coach")
@@ -18,14 +23,14 @@ def health():
 
 @app.post("/plan")
 def create_plan(request: PlanRequest):
-    profile = goal_agent(
+    profile = goal(
         level=request.level,
         goal=request.goal,
         weeks=request.weeks,
         daily_minutes=request.daily_minutes,
     )
 
-    curriculum_plan = curriculum_agent(profile)
+    curriculum_plan = curriculum(profile)
 
     return {
         "profile": profile,
@@ -35,14 +40,14 @@ def create_plan(request: PlanRequest):
 
 @app.post("/exercise")
 def create_exercise(request: ExerciseRequest):
-    profile = goal_agent(
+    profile = goal(
         level=request.level,
         goal=request.goal,
         weeks=request.weeks,
         daily_minutes=request.daily_minutes,
     )
 
-    curriculum_plan = curriculum_agent(profile)
+    curriculum_plan = curriculum(profile)
 
     exercise = practice_agent(
         curriculum_plan=curriculum_plan,
