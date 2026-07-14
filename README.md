@@ -97,7 +97,7 @@ pip install -r requirements.txt
 ## Run Backend
 
 ```bash
-python3 -m uvicorn app.main:app --reload
+python3 -m uvicorn app.main:app --reload --env-file .env
 ```
 
 API documentation:
